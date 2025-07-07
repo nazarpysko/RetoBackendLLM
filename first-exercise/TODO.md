@@ -3,4 +3,3 @@
 
  - Linter
  - Dockerize everything
- - Logger though a middleware 

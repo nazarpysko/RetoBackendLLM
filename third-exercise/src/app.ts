@@ -2,11 +2,15 @@ import express from 'express';
 import routes from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './docs/swaggerConfig';
+import { logger } from './middleware/logger';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
 const port = 3000;
+
+// Logger middleware
+app.use(logger);
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
