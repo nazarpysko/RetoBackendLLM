@@ -35,7 +35,7 @@ jokesRouter.get('{/:type}', async (req: Request, res: Response) => {
 });
 
 jokesRouter.post('/', async (req: Request, res: Response) => {
-    const { text } = req.body;
+    const { text } = req.body || {};
 
     if (!text) {
         res.status(400).json({ message: 'Joke text is required.' });
@@ -52,8 +52,8 @@ jokesRouter.post('/', async (req: Request, res: Response) => {
 });
 
 jokesRouter.put('/:number', async (req: Request, res: Response) => {
-    const { number } = req.params;
-    const { text } = req.body;
+    const { number } = req.params || {};
+    const { text } = req.body || {};
   
     if (!text) {
         res.status(400).json({ message: 'New joke text is required.' });
@@ -81,7 +81,7 @@ jokesRouter.put('/:number', async (req: Request, res: Response) => {
   });
 
 jokesRouter.delete('/:number', async (req: Request, res: Response) => {
-    const { number } = req.params;
+    const { number } = req.params || {};
     
     if (!number || !mongoose.Types.ObjectId.isValid(number)) {
         res.status(400).json({ message: 'Number must be passed and be a valid mongoose id.' });

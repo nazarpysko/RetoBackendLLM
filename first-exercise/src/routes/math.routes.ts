@@ -4,7 +4,7 @@ import { lcm, increment } from '../services/math.services';
 const mathRouter = Router()
 
 mathRouter.get('/lcm', (req: Request, res: Response) => {
-    const numbersParam = req.query.numbers as string;
+    const numbersParam = req.query.numbers as string || '';
 
     if (!numbersParam) {
         res.status(400).json({ message: 'Numbers query parameter is required' });
@@ -23,7 +23,7 @@ mathRouter.get('/lcm', (req: Request, res: Response) => {
 });
 
 mathRouter.get('/increment', (req: Request, res: Response) => {
-    const numberParam = req.query.number as string;
+    const numberParam = req.query.number as string || '';
 
     if (!numberParam || isNaN(Number(numberParam))) {
         res.status(400).json({ message: 'Query parameter "number" must be a valid integer.' });

@@ -4,7 +4,7 @@ import { getCombinedJokes } from "../services/joke.services";
 const jokesRouter = Router();
 
 jokesRouter.get('/emparejados', async (req, res) => {
-    const useLLM = req.query.useLLM === 'true';
+    const useLLM: boolean = req.query.useLLM === 'true' || false;
 
     try {
         const combinedJokes = await getCombinedJokes(useLLM);
