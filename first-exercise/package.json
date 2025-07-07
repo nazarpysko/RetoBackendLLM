@@ -1,0 +1,37 @@
+{
+  "name": "first-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "Nazar Pysko",
+  "license": "ISC",
+  "description": "First exercise of \"Reto BackEnd - LLM Engineer\" course",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^24.0.10",
+    "@types/supertest": "^6.0.3",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@yaml-js/typescript": "^0.1.0",
+    "jest": "^30.0.4",
+    "supertest": "^7.1.1",
+    "swagger-ui-express": "^5.0.1",
+    "ts-jest": "^29.4.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
+    "yaml": "^2.8.0"
+  }
+}

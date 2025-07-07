@@ -1,0 +1,316 @@
+openapi: 3.0.3
+info:
+  title: Joke and Math API
+  description: API for managing jokes and math operations.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3000/
+paths:
+  /api/v1/jokes:
+    get:
+      summary: Get a random joke (Chuck or Dad)
+      tags:
+        - Jokes
+      responses:
+        '200':
+          description: A random joke response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jokeType:
+                    type: string
+                    description: Type of joke ('chuck' or 'dad')
+                  joke:
+                    type: string
+                    description: The joke text
+                example:
+                  jokeType: chuck
+                  joke: "Chuck Norris can divide by zero."
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Create a new joke
+      tags:
+        - Jokes
+      requestBody:
+        description: Joke text to save
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: The joke text
+              example:
+                text: "This is a new joke."
+      responses:
+        '201':
+          description: Joke created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  joke:
+                    type: string
+                    description: The saved joke text
+                  id:
+                    type: string
+                    description: The MongoDB ID of the saved joke
+                example:
+                  joke: "This is a new joke."
+                  id: "60a7b2b5c1234567890abcdef"
+        '400':
+          description: Missing joke text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/jokes/{type}:
+    get:
+      summary: Get a joke by type
+      tags:
+        - Jokes
+      parameters:
+        - name: type
+          in: path
+          description: Type of joke to retrieve (must be 'chuck' or 'dad')
+          required: true
+          schema:
+            type: string
+            enum: [chuck, dad]
+      responses:
+        '200':
+          description: A joke response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jokeType:
+                    type: string
+                    description: Type of joke ('chuck' or 'dad')
+                  joke:
+                    type: string
+                    description: The joke text
+                example:
+                  jokeType: dad
+                  joke: "Why did the dad joke cross the road? To get to the pun side."
+        '400':
+          description: Invalid joke type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/jokes/{number}:
+    put:
+      summary: Update a joke by ID
+      tags:
+        - Jokes
+      parameters:
+        - name: number
+          in: path
+          description: MongoDB ObjectId of the joke to update
+          required: true
+          schema:
+            type: string
+            pattern: "^[a-f\\d]{24}$"
+            example: "60a7b2b5c1234567890abcdef"
+      requestBody:
+        description: New joke text to update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Updated joke text
+              example:
+                text: "Updated joke text."
+      responses:
+        '201':
+          description: Joke updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  joke:
+                    type: string
+                    description: The updated joke text
+                  id:
+                    type: string
+                    description: The MongoDB ID of the updated joke
+                example:
+                  joke: "Updated joke text."
+                  id: "60a7b2b5c1234567890abcdef"
+        '400':
+          description: Missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Joke not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Delete a joke by ID
+      tags:
+        - Jokes
+      parameters:
+        - name: number
+          in: path
+          description: MongoDB ObjectId of the joke to delete
+          required: true
+          schema:
+            type: string
+            pattern: "^[a-f\\d]{24}$"
+            example: "60a7b2b5c1234567890abcdef"
+      responses:
+        '200':
+          description: Joke deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  joke:
+                    type: string
+                    description: Deleted joke text
+                  id:
+                    type: string
+                    description: MongoDB ID of the deleted joke
+                example:
+                  joke: "Deleted joke text."
+                  id: "60a7b2b5c1234567890abcdef"
+        '400':
+          description: Missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Joke not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/math/lcm:
+    get:
+      summary: Calculate least common multiple (LCM) of a list of numbers
+      tags:
+        - Math
+      parameters:
+        - name: numbers
+          in: query
+          description: Comma-separated list of numbers
+          required: true
+          schema:
+            type: string
+            example: "4,6,8"
+      responses:
+        '200':
+          description: LCM calculation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lcm:
+                    type: integer
+                example:
+                  lcm: 24
+        '400':
+          description: Invalid or missing query parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/math/increment:
+    get:
+      summary: Increment a number by 1
+      tags:
+        - Math
+      parameters:
+        - name: number
+          in: query
+          description: Number to increment
+          required: true
+          schema:
+            type: integer
+            example: 5
+      responses:
+        '200':
+          description: Increment result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  increment:
+                    type: integer
+                example:
+                  increment: 6
+        '400':
+          description: Invalid or missing query parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: "Error message here."
