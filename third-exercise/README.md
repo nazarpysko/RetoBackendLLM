@@ -16,6 +16,19 @@ This project is an Express.js API that fetches random Chuck Norris and Dad jokes
 - npm
 - (Optional) HuggingFace Inference API key for LLM-powered joke combination
 
+
+## Project Structure
+```
+third-exercise/
+├── src/
+│   ├── app.ts                  # Main Express app
+│   ├── routes/
+│   │   └── jokes.routes.ts     # Jokes API route
+│   ├── services/
+│   │   └── joke.services.ts    # Joke fetching and combining logic
+│   └── docs/                   # Swagger documentation (not actually implemented)
+```
+
 ## Setup
 
 1. **Install dependencies:**
@@ -94,10 +107,3 @@ Run tests with:
 ```bash
 npm test
 ```
-
-## Project Structure
-
-- `src/app.ts` – Main Express app
-- `src/routes/jokes.routes.ts` – Jokes API route
-- `src/services/joke.services.ts` – Joke fetching and combining logic
-- `src/docs/` – Swagger documentation (not actually implemented)

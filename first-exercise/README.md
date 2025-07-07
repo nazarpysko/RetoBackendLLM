@@ -15,6 +15,21 @@ This project is an Express.js REST API for managing jokes (Chuck Norris and Dad 
 - npm
 - MongoDB (running locally at `mongodb://localhost:27017/jokesdb` by default)
 
+## Project structure
+
+```
+first-exercise/
+├── src/
+│   ├── app.ts                  # Main Express app
+│   ├── routes/                 # API route definitions
+│   ├── services/               # Business logic for jokes and math
+│   ├── models/                 # Mongoose models
+│   ├── database/               # MongoDB connection
+│   ├── docs/                   # Swagger documentation
+│   └── __tests__/              # Test files
+
+```
+
 ## Setup
 
 1. **Install dependencies:**
@@ -193,16 +208,6 @@ Run tests with:
 ```bash
 npm test
 ```
-
-## Project Structure
-
-- `src/app.ts` – Main Express app
-- `src/routes/` – API route definitions
-- `src/services/` – Business logic for jokes and math
-- `src/models/` – Mongoose models
-- `src/database/` – MongoDB connection
-- `src/docs/` – Swagger documentation
-- `src/__tests__/` – Test files
 
 ## TODOs
 

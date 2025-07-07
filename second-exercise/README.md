@@ -2,6 +2,19 @@
 
 This project sets up a simple jokes database using PostgreSQL, with users, themes, and jokes. It uses Docker Compose for easy setup and includes SQL scripts to initialize and populate the database.
 
+
+## Features
+
+- Predefined tables for users, themes, and jokes.
+- Example SQL scripts to create, populate, and query the database.
+- Easy setup of a PostgreSQL database using Docker Compose.
+- Simple script to run queries from the command line.
+
+## Requirements
+
+- [Docker](https://www.docker.com/get-started) installed on your system
+- Bash shell (for running `run-query.sh` on Windows, use Git Bash or WSL)
+
 ## Project Structure
 
 ```
@@ -17,12 +30,8 @@ second-exercise/
 └── run-query.sh                # Bash script to run queries against the database
 ```
 
-## Prerequisites
 
-- [Docker](https://www.docker.com/get-started) installed on your system
-- Bash shell (for running `run-query.sh` on Windows, use Git Bash or WSL)
-
-## Setup Instructions
+## Setup
 
 1. **Start the PostgreSQL database using Docker Compose:**
    ```sh
@@ -31,6 +40,15 @@ second-exercise/
    This will start a PostgreSQL container and initialize the database using the scripts in `initdb/`.
 
 2. **Wait a few seconds** for the database to initialize (usually 5-10 seconds).
+
+## Environment Setup
+
+`.env` file is required for this exercise. Just create a file in `second-exercise` folder with the following content:
+``` bash
+POSTGRES_USER=WHATEVER_USERNAME_GOES_HERE
+POSTGRES_PASSWORD=YOUR_PASSWORD_GOES_HERE
+POSTGRES_DB=WHATEVER_DB_NAME_GOES_HERE
+```
 
 ## Running SQL Queries
 
