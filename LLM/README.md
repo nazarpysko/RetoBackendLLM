@@ -103,22 +103,3 @@ curl -X POST http://localhost:3000/api/v1/consulta \
   },
 ]
 ```
-
----
-
-## API Documentation (Swagger)
-
-This project includes interactive API documentation using **Swagger**. You can use Swagger UI to explore and test the available endpoints directly from your browser.
-
-- **Access Swagger UI:**
-  - Once the server is running, open your browser and go to:
-    - [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
-  - Here you will find detailed documentation for all available endpoints, request/response formats, and can try out the API interactively.
-
-- **Swagger Spec Location:**
-  - The OpenAPI/Swagger specification is located at `src/docs/swagger.yaml`.
-
-- **Updating the Docs:**
-  - If you make changes to the API, update the `swagger.yaml` file to keep the documentation in sync.
-
----
