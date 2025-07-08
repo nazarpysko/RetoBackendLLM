@@ -1,0 +1,26 @@
+{
+  "name": "llm-challenge",
+  "version": "1.0.0",
+  "description": "This is the project containing my solution for the LLM challenge using Azure",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "upload-doc": "ts-node scripts/upload-doc.ts"
+  },
+  "author": "Nazar Pysko",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/ai-form-recognizer": "^5.1.0",
+    "@azure/openai": "^2.0.0",
+    "@azure/search-documents": "^12.1.0",
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "openai": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
