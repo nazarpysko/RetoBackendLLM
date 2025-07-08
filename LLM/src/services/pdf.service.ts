@@ -28,7 +28,10 @@ const extractTextFromPDF = async (pdfPath: string): Promise<string[]> => {
     if (result.pages) {
         result.pages.forEach((page: any) => {
             const lines = page.lines?.map((line: any) => line.content).join(' ') ?? '';
-            fragments.push(lines);
+            // Split the lines into fragments of max 200 characters
+            for (let i = 0; i < lines.length; i += 500) {
+                fragments.push(lines.substring(i, i + 200));
+            }
         });
     }
 

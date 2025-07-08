@@ -71,8 +71,8 @@ const getCompletionFromOpenAI = async (prompt: string): Promise<string> => {
     const response = await client.chat.completions.create({
       model: deployment,
       messages: messages as ChatCompletionMessageParam[],
-      temperature: 1, // Low temperature to make the model more accurate giving him less room to be creative
-      max_completion_tokens: 500,
+      temperature: 0.5, // Low temperature to make the model more accurate giving him less room to be creative
+      max_completion_tokens: 1000,
     });
 
     return response.choices?.[0]?.message?.content ?? "No se pudo generar respuesta.";

@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { extractTextFromPDF } from '../src/services/pdf.service';
 import { uploadDocument } from '../src/services/search.service';
 import fs from 'fs';

@@ -4,8 +4,6 @@ import {
   SearchClient,
   SearchIndex,
   SearchDocumentsResult,
-  ExtractiveQueryCaption,
-  ExtractiveQueryAnswer
 } from '@azure/search-documents';
 import { getDateFromPdfName } from './pdf.service';
 
@@ -77,7 +75,15 @@ const uploadDocument = async (fragments: string[], pdfPath: string) => {
 const search = async (query: string): Promise<any[]> => {
   const resultsArray: any[] = [];
   try {
-    const results: SearchDocumentsResult<any> = await searchClient.search(query);
+    const results: SearchDocumentsResult<any> = await searchClient.search(query, {
+      searchFields: ['chunk'],
+      top: 5,
+      queryType: 'semantic',
+      semanticSearchOptions: {
+        configurationName: 'MySemanticSearchConfig',
+      },
+      select: ['chunk'],
+    });
     
     for await (const result of results.results) {
       resultsArray.push(result.document.chunk);
@@ -91,14 +97,3 @@ const search = async (query: string): Promise<any[]> => {
 }
 
 export { createIndexIfNotExists, uploadDocument, search };
-
-// // 5. Run everything
-// (async () => {
-//   try {
-//     await createIndexIfNotExists();
-//     await uploadSampleActa();
-//     await search('paneles solares');
-//   } catch (err) {
-//     console.error('Error:', err);
-//   }
-// })();
